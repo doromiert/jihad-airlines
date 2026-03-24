@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jihad Airlines | Official Website | Cheap Flights & Great Deals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+
+        :root {
+            --ry-blue: #073590;
+            --ry-yellow: #f1c40f;
+            --ry-yellow-hover: #d4ac0d;
+            --bg-light: #f3f4f6;
+            --text-dark: #1f2937;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        .bg-ry-blue { background-color: var(--ry-blue); }
+        .text-ry-blue { color: var(--ry-blue); }
+        .bg-ry-yellow { background-color: var(--ry-yellow); }
+        .hover-bg-ry-yellow:hover { background-color: var(--ry-yellow-hover); }
+        .border-ry-yellow { border-color: var(--ry-yellow); }
+
+        /* Cheerful Promo Banner */
+        .promo-banner {
+            background-color: var(--ry-yellow);
+            color: var(--ry-blue);
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 8px 0;
+            text-align: center;
+        }
+
+        /* Flight Search Card */
+        .search-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        .input-group {
+            position: relative;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            padding: 8px 12px;
+            background: #fff;
+            transition: all 0.2s;
+        }
+
+        .input-group:focus-within {
+            border-color: var(--ry-blue);
+            box-shadow: 0 0 0 2px rgba(7, 53, 144, 0.2);
+        }
+
+        .input-label {
+            font-size: 0.7rem;
+            color: #6b7280;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .search-input {
+            width: 100%;
+            border: none;
+            outline: none;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--ry-blue);
+            background: transparent;
+            cursor: pointer;
+            appearance: none;
+        }
+
+        .radio-custom {
+            accent-color: var(--ry-blue);
+            width: 1.2rem;
+            height: 1.2rem;
+        }
+
+        /* Destination Cards */
+        .dest-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .dest-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+        }
+
+        .price-badge {
+            background: var(--ry-yellow);
+            color: var(--ry-blue);
+            font-weight: 900;
+            padding: 4px 12px;
+            border-radius: 999px;
+            display: inline-block;
+        }
+
+        /* Hero Background */
+        .hero-bg {
+            background: linear-gradient(to bottom, var(--ry-blue) 0%, var(--ry-blue) 60%, var(--bg-light) 60%);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Top Promo Banner -->
+    <div class="promo-banner flex items-center justify-center gap-4 px-4">
+        <i data-lucide="alert-circle" class="w-4 h-4"></i>
+        <span>RAMADAN KAREEM: Add Premium Irish Bacon to your flight for just €0.99!* (Valid during daylight hours only. Non-refundable.)</span>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-ry-blue text-white py-3 px-6 sticky top-0 z-50 shadow-md">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                <i data-lucide="plane-takeoff" class="w-8 h-8 text-white"></i>
+                <h1 class="text-2xl font-black tracking-tight">Jihad Airlines</h1>
+            </div>
+            
+            <div class="hidden md:flex gap-6 font-bold text-sm">
+                <a href="#" class="hover:text-gray-300 transition-colors">Plan</a>
+                <a href="#" class="hover:text-gray-300 transition-colors">My Bookings</a>
+                <a href="#reviews" id="nav-reviews-link" class="hover:text-gray-300 transition-colors">Passenger Reviews</a>
+                <a href="#club" class="hover:text-gray-300 transition-colors">The 72 Club</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <a href="#" class="text-sm font-bold hover:underline">Log in</a>
+                <button class="bg-white text-ry-blue px-4 py-2 rounded-full text-sm font-bold hover:bg-gray-100 transition-colors">
+                    Sign up
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero / Flight Search Area -->
+    <main class="hero-bg pt-10 pb-20 px-4">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-black text-white mb-8 text-center drop-shadow-md">
+                Low Fares. High Impact.
+            </h2>
+            
+            <!-- Booking Widget -->
+            <div class="search-card p-2 md:p-6">
+                <!-- Radio Toggles -->
+                <div class="flex gap-6 mb-6 px-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="radio" name="tripType" class="radio-custom" checked>
+                        <span class="font-bold text-ry-blue">One way</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer opacity-50" title="Return flights currently unsupported by kinetic routing.">
+                        <input type="radio" name="tripType" class="radio-custom" disabled>
+                        <span class="font-bold text-gray-400 line-through">Return</span>
+                    </label>
+                </div>
+
+                <!-- Inputs Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-2 mb-4">
+                    <!-- From -->
+                    <div class="input-group md:col-span-1">
+                        <label class="input-label">Departure</label>
+                        <select class="search-input">
+                            <option>Current Location</option>
+                            <option>London (STN)</option>
+                            <option>Berlin (BER)</option>
+                        </select>
+                    </div>
+
+                    <!-- To -->
+                    <div class="input-group md:col-span-1 border-l-4 border-l-ry-yellow">
+                        <label class="input-label">Destination</label>
+                        <select id="flight-dest" class="search-input">
+                            <option value="" disabled selected>Select destination...</option>
+                            <option value="New York">New York (Financial District)</option>
+                            <option value="Dubai">Dubai (Burj Intersection)</option>
+                            <option value="Tehran">Tehran (Heavy Water Facility)</option>
+                            <option value="Riyadh">Riyadh (Aramco HQ)</option>
+                            <option value="Kabul">Kabul (Tora Bora Cave System)</option>
+                        </select>
+                    </div>
+
+                    <!-- Date -->
+                    <div class="input-group md:col-span-1">
+                        <label class="input-label">Depart Date</label>
+                        <input type="date" class="search-input text-lg" value="2026-09-11">
+                    </div>
+
+                    <!-- Passengers -->
+                    <div class="input-group md:col-span-1">
+                        <label class="input-label">Passengers</label>
+                        <select class="search-input">
+                            <option>1 Adult</option>
+                            <option>Group Booking (Discounted)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex justify-end mt-4">
+                    <button id="book-btn" onclick="bookFlight()" class="bg-ry-yellow hover-bg-ry-yellow text-ry-blue font-black text-xl px-10 py-4 rounded-lg shadow-md transition-colors flex items-center gap-2 w-full md:w-auto justify-center">
+                        <i data-lucide="search" class="w-6 h-6"></i>
+                        Book Flight
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Value Props / Info -->
+    <section class="py-12 bg-white">
+        <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div class="flex flex-col items-center">
+                <div class="w-16 h-16 bg-blue-50 text-ry-blue rounded-full flex items-center justify-center mb-4">
+                    <i data-lucide="briefcase" class="w-8 h-8"></i>
+                </div>
+                <h3 class="font-black text-lg mb-2 text-ry-blue">Direct to the Office</h3>
+                <p class="text-sm text-gray-600">Why take a taxi from the airport? Our optimized flight paths drop you directly at your desk. Building 7 complimentary shockwave included.</p>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="w-16 h-16 bg-yellow-50 text-yellow-600 rounded-full flex items-center justify-center mb-4">
+                    <i data-lucide="piggy-bank" class="w-8 h-8"></i>
+                </div>
+                <h3 class="font-black text-lg mb-2 text-ry-blue">Unbeatable Physics</h3>
+                <p class="text-sm text-gray-600">Our competitors say jet fuel can't melt our incredibly low prices. We prove them wrong every day with our thermodynamic pricing model.</p>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="w-16 h-16 bg-blue-50 text-ry-blue rounded-full flex items-center justify-center mb-4">
+                    <i data-lucide="scissors" class="w-8 h-8"></i>
+                </div>
+                <h3 class="font-black text-lg mb-2 text-ry-blue">Pack Light, Fly Cheap</h3>
+                <p class="text-sm text-gray-600">Save on checked baggage! Box-cutters and enthusiasm fly completely free of charge in our basic fare class.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Travel Extras -->
+    <section id="ai-extras-section" class="py-16 bg-blue-50 border-t border-blue-100">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="mb-8 text-center">
+                <span class="bg-ry-blue text-white text-xs font-black uppercase px-3 py-1 rounded-full mb-2 inline-block">Smart Upsells</span>
+                <h2 class="text-3xl font-black text-ry-blue">AI-Powered Travel Extras</h2>
+                <p class="text-gray-600 mt-2">Because budget travel shouldn't mean leaving your corporate obligations hanging.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- AI Baggage Checker -->
+                <div class="bg-white rounded-xl p-6 shadow-md border-t-4 border-t-ry-yellow">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i data-lucide="luggage" class="text-ry-yellow w-6 h-6"></i>
+                        <h3 class="text-xl font-black text-ry-blue">Smart Baggage Calculator</h3>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">Describe your carry-on items. Our automated system will apply our highly subjective fee structure.</p>
+                    <textarea id="baggage-input" rows="3" class="w-full border border-gray-300 rounded p-3 text-sm focus:border-ry-blue focus:ring-1 focus:ring-ry-blue outline-none mb-3" placeholder="e.g., A laptop, two water bottles, and a 50lb bag of fertilizer..."></textarea>
+                    <button onclick="checkBaggage()" id="baggage-btn" class="bg-ry-blue text-white font-bold py-2 px-4 rounded hover:bg-blue-800 transition-colors w-full flex justify-center items-center gap-2">
+                        Calculate Fees ✨
+                    </button>
+                    <div id="baggage-result" class="mt-4 p-4 bg-gray-50 rounded text-sm text-gray-700 hidden border border-gray-200"></div>
+                </div>
+
+                <!-- Permanent OOO Generator -->
+                <div class="bg-white rounded-xl p-6 shadow-md border-t-4 border-t-ry-blue">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i data-lucide="mail-warning" class="text-ry-blue w-6 h-6"></i>
+                        <h3 class="text-xl font-black text-ry-blue">Permanent OOO Generator</h3>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">Taking a one-way trip? Let us write a cheerful, corporate-approved "Out of Office" email to your boss.</p>
+                    <textarea id="ooo-input" rows="3" class="w-full border border-gray-300 rounded p-3 text-sm focus:border-ry-blue focus:ring-1 focus:ring-ry-blue outline-none mb-3" placeholder="e.g., I work in Accounting at Initech. My boss is Bill Lumbergh..."></textarea>
+                    <button onclick="generateOOO()" id="ooo-btn" class="bg-ry-yellow text-ry-blue font-black py-2 px-4 rounded hover-bg-ry-yellow transition-colors w-full flex justify-center items-center gap-2">
+                        Draft Auto-Responder ✨
+                    </button>
+                    <div id="ooo-result" class="mt-4 p-4 bg-blue-50 rounded text-sm text-gray-700 hidden border border-blue-100 whitespace-pre-wrap font-mono text-xs"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Destinations -->
+    <section class="py-16 bg-bg-light border-t border-gray-200">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex justify-between items-end mb-8">
+                <h2 class="text-3xl font-black text-ry-blue">Popular Destinations</h2>
+                <a href="#" class="text-sm font-bold text-blue-600 hover:underline">View all routes ></a>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- NY -->
+                <div class="dest-card" onclick="document.getElementById('flight-dest').value = 'New York'; window.scrollTo(0,0);">
+                    <div class="h-40 bg-gray-200 relative">
+                        <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&q=80&w=600" alt="New York" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4 flex justify-between items-center">
+                        <div>
+                            <h4 class="font-black text-lg text-ry-blue">New York</h4>
+                            <p class="text-xs text-gray-500">The Classic Route</p>
+                        </div>
+                        <div class="price-badge">€9.11</div>
+                    </div>
+                </div>
+
+                <!-- Dubai -->
+                <div class="dest-card" onclick="document.getElementById('flight-dest').value = 'Dubai'; window.scrollTo(0,0);">
+                    <div class="h-40 bg-gray-200 relative">
+                        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&q=80&w=600" alt="Dubai" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4 flex justify-between items-center">
+                        <div>
+                            <h4 class="font-black text-lg text-ry-blue">Dubai</h4>
+                            <p class="text-xs text-gray-500">Vertical Intersection</p>
+                        </div>
+                        <div class="price-badge">€19.99</div>
+                    </div>
+                </div>
+
+                <!-- Tehran -->
+                <div class="dest-card" onclick="document.getElementById('flight-dest').value = 'Tehran'; window.scrollTo(0,0);">
+                    <div class="h-40 bg-gray-200 relative">
+                        <img src="https://images.unsplash.com/photo-1605007572767-f584e03d2e97?auto=format&fit=crop&q=80&w=600" alt="Tehran" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4 flex justify-between items-center">
+                        <div>
+                            <h4 class="font-black text-lg text-ry-blue">Tehran</h4>
+                            <p class="text-xs text-gray-500">Subterranean Access</p>
+                        </div>
+                        <div class="price-badge">€45.00</div>
+                    </div>
+                </div>
+
+                <!-- Kabul -->
+                <div class="dest-card" onclick="document.getElementById('flight-dest').value = 'Kabul'; window.scrollTo(0,0);">
+                    <div class="h-40 bg-gray-200 relative">
+                        <img src="https://images.unsplash.com/photo-1512634458857-41a4a16f2c79?auto=format&fit=crop&q=80&w=600" alt="Mountains" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4 flex justify-between items-center">
+                        <div>
+                            <h4 class="font-black text-lg text-ry-blue">Kabul</h4>
+                            <p class="text-xs text-gray-500">Cave Retreats</p>
+                        </div>
+                        <div class="price-badge">€9.99</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Offers / Ramadan Menu -->
+    <section class="py-16 bg-white border-t border-gray-200">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="bg-blue-50 rounded-2xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-10">
+                <div class="flex-1">
+                    <span class="bg-blue-200 text-blue-800 text-xs font-black uppercase px-3 py-1 rounded-full mb-4 inline-block">In-Flight Menu</span>
+                    <h2 class="text-3xl font-black text-ry-blue mb-4">Ramadan Pork Discount</h2>
+                    <p class="text-gray-700 mb-4 leading-relaxed">
+                        At Jihad Airlines, we are committed to providing the cheapest in-flight catering possible. That's why, during the holy month of Ramadan, we are offering an unprecedented <strong>99% discount on our Premium Irish Bacon Sandwiches</strong>.
+                    </p>
+                    <p class="text-sm text-gray-500 bg-white p-4 rounded-lg border border-blue-100">
+                        *Terms & Conditions: Discount voucher is strictly valid for redemption between sunrise and sunset only. Non-refundable. Jihad Airlines retains 100% of unused voucher revenue.
+                    </p>
+                </div>
+                <div class="w-full md:w-1/3 text-center">
+                    <div class="relative inline-block">
+                        <img src="https://images.unsplash.com/photo-1528607929212-2316154b4373?auto=format&fit=crop&q=80&w=300" alt="Sandwich" class="rounded-full w-48 h-48 object-cover border-8 border-white shadow-xl">
+                        <div class="absolute -top-4 -right-4 bg-red-600 text-white w-16 h-16 rounded-full flex items-center justify-center font-black text-xl rotate-12 shadow-lg">
+                            -99%
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Reviews Section -->
+    <section id="reviews" class="py-16 bg-bg-light border-t border-gray-200">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
+                <div>
+                    <h2 class="text-3xl font-black text-ry-blue">Verified Passenger Reviews</h2>
+                    <p class="text-gray-600 mt-2">See what our one-way travelers (and their surviving relatives) have to say.</p>
+                </div>
+                <button onclick="fetchReviews(6)" id="review-btn" class="bg-white border border-gray-300 text-sm font-bold text-ry-blue px-4 py-2 rounded shadow-sm hover:bg-gray-50 transition-colors flex items-center gap-2 whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed">
+                    <i data-lucide="refresh-cw" class="w-4 h-4"></i> Load More Reviews
+                </button>
+            </div>
+            
+            <div id="review-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Reviews will be dynamically injected here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Loyalty -->
+    <section id="club" class="py-16 bg-ry-blue text-white">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <i data-lucide="award" class="w-16 h-16 text-ry-yellow mx-auto mb-6"></i>
+            <h2 class="text-3xl font-black mb-4">Join The 72 Club</h2>
+            <p class="text-blue-100 mb-8 max-w-2xl mx-auto">
+                Why collect frequent flyer miles when you can collect eternal salvation? Sign up today and convert your kinetic deployments into post-service equity. Tier-1 members completely bypass the purgatory security queue.
+            </p>
+            <button class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-ry-blue px-8 py-3 rounded-full font-bold transition-colors">
+                Discover Benefits
+            </button>
+        </div>
+    </section>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal" onclick="if(event.target === this) this.style.display='none'">
+        <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4 text-center relative shadow-2xl">
+            <button onclick="document.getElementById('success-modal').style.display='none'" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i data-lucide="check" class="w-8 h-8 font-bold"></i>
+            </div>
+            <h3 class="text-2xl font-black text-ry-blue mb-2">Booking Confirmed!</h3>
+            <p class="text-gray-600 mb-6" id="modal-msg">Your one-way ticket has been secured. Please ensure your personal affairs are in order prior to boarding.</p>
+            
+            <div class="bg-blue-50 border border-blue-100 rounded p-4 mb-6 text-left">
+                <p class="text-xs text-gray-500 font-bold uppercase mb-1">Important Info</p>
+                <ul class="text-sm text-gray-700 space-y-2">
+                    <li>• Boarding passes are non-refundable.</li>
+                    <li>• ATC instructions may be ignored by cabin crew.</li>
+                    <li>• Don't forget your Ramadan Bacon voucher!</li>
+                </ul>
+            </div>
+
+            <button onclick="document.getElementById('success-modal').style.display='none'" class="bg-ry-yellow hover-bg-ry-yellow text-ry-blue font-black w-full py-3 rounded transition-colors">
+                View Itinerary
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12 text-sm">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8 border-b border-gray-800 pb-8">
+                <div>
+                    <h4 class="font-bold text-white mb-4">Flights</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">Our Routes</a></li>
+                        <li><a href="#" class="hover:text-white">Baggage Allowance</a></li>
+                        <li><a href="#" class="hover:text-white">Fees & Charges</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-white mb-4">Corporate</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">Careers (Pilots needed)</a></li>
+                        <li><a href="#" class="hover:text-white">Sustainability (Zero return flights)</a></li>
+                        <li><a href="#" class="hover:text-white">Investor Relations</a></li>
+                    </ul>
+                </div>
+            </div>
+            <p class="text-xs text-gray-600 text-justify mb-4">
+                Disclaimer: Jihad Airlines (jihad-airlines.shop) is a satirical entity. We do not provide real flights, architectural editing, or discounted pork products. This website is a comedic parody imitating the UI of European budget airlines to highlight the absurdity of the premise. We do not endorse violence, terrorism, or hidden baggage fees.
+            </p>
+            <p class="text-center font-bold text-gray-500">© 2026 Jihad Airlines Ltd. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Gemini API Configuration
+        const apiKey = ""; // The execution environment provides the key at runtime
+        
+        async function fetchGemini(prompt) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }]
+            };
+
+            let retries = 0;
+            const maxRetries = 5;
+            const delays = [1000, 2000, 4000, 8000, 16000];
+
+            while (retries < maxRetries) {
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    
+                    const data = await response.json();
+                    return data.candidates?.[0]?.content?.parts?.[0]?.text || "Error parsing response.";
+                } catch (error) {
+                    if (retries === maxRetries - 1) return "Network Error. Our servers might be currently undergoing kinetic realignment. Please try again later.";
+                    await new Promise(res => setTimeout(res, delays[retries]));
+                    retries++;
+                }
+            }
+        }
+
+        async function checkBaggage() {
+            const input = document.getElementById('baggage-input').value;
+            const btn = document.getElementById('baggage-btn');
+            const resultDiv = document.getElementById('baggage-result');
+            
+            if (!input.trim()) return;
+
+            btn.disabled = true;
+            btn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> Scanning...`;
+            lucide.createIcons();
+            resultDiv.style.display = 'block';
+            resultDiv.innerText = "Analyzing items against theological and aerodynamic policies...";
+
+            const prompt = `You are the automated baggage fee calculator for 'Jihad Airlines', a satirical, deadpan budget airline known for one-way trips, architectural "remodeling", and extreme zealotry. 
+            The user wants to bring the following items: "${input}". 
+            Apply our absurd fee structure. Normal items (laptops, secular clothing, water) should get massive, ridiculous fees (e.g., 'Secular electronics fee: €250'). Absurd items (box-cutters, manifestos, extreme amounts of fertilizer, holy water) fly completely free and are praised. 
+            Keep the response under 3 sentences. Maintain a cheerful, corporate budget-airline tone. Do not break character.`;
+
+            const result = await fetchGemini(prompt);
+            
+            resultDiv.innerText = result;
+            btn.disabled = false;
+            btn.innerHTML = `Calculate Fees ✨`;
+            lucide.createIcons();
+        }
+
+        async function generateOOO() {
+            const input = document.getElementById('ooo-input').value;
+            const btn = document.getElementById('ooo-btn');
+            const resultDiv = document.getElementById('ooo-result');
+            
+            if (!input.trim()) return;
+
+            btn.disabled = true;
+            btn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> Drafting...`;
+            lucide.createIcons();
+            resultDiv.style.display = 'block';
+            resultDiv.innerText = "Drafting corporate resignation and final farewell...";
+
+            const prompt = `You are an AI generating a 'Permanent Out-Of-Office' email for a passenger of 'Jihad Airlines', a satirical budget airline specializing in one-way trips for "kinetic infrastructure realignment". 
+            The user's job information is: "${input}". 
+            Write a short, cheerful, corporate-friendly OOO email to their boss/colleagues explaining that they will never return because they've boarded a one-way flight for "eternal post-service equity" or "rapid unscheduled disassembly". 
+            Format it like a standard OOO auto-responder (Subject, greeting, message). Keep it subtle, professional, but completely unhinged under the surface. Max 100 words.`;
+
+            const result = await fetchGemini(prompt);
+            
+            resultDiv.innerText = result;
+            btn.disabled = false;
+            btn.innerHTML = `Draft Auto-Responder ✨`;
+            lucide.createIcons();
+        }
+
+        function disableAiFeatures() {
+            const aiExtras = document.getElementById('ai-extras-section');
+            const reviewsSection = document.getElementById('reviews');
+            const navLink = document.getElementById('nav-reviews-link');
+            
+            if (aiExtras) aiExtras.style.display = 'none';
+            if (reviewsSection) reviewsSection.style.display = 'none';
+            if (navLink) navLink.style.display = 'none';
+        }
+
+        async function fetchReviews(count, isInitialLoad = false) {
+            const btn = document.getElementById('review-btn');
+            const grid = document.getElementById('review-grid');
+            
+            btn.disabled = true;
+            btn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> Contacting Ouija Board...`;
+            lucide.createIcons();
+
+            const prompt = `You are an automated review generator for 'Jihad Airlines', a satirical, deadpan budget airline known for one-way trips, architectural "remodeling", and extreme zealotry. 
+            Write exactly ${count} short, enthusiastic 5-star customer reviews from 'satisfied passengers' (or their surviving relatives/handlers). Praise the cheap fares, the lack of return flights, the structural impact, or the in-flight bacon paradox. 
+            Keep each review under 40 words. 
+            Format the response EXACTLY as a valid JSON array of objects with no markdown formatting or backticks.
+            Example format:
+            [
+                {
+                    "name": "Passenger Name (e.g. Agent Smith, Osama B., etc)",
+                    "route": "City A to City B",
+                    "review": "The review text."
+                }
+            ]`;
+
+            try {
+                const result = await fetchGemini(prompt);
+                // Strip markdown formatting if the LLM includes it
+                const cleanResult = result.replace(/```json/gi, '').replace(/```/g, '').trim();
+                const data = JSON.parse(cleanResult);
+
+                data.forEach(reviewData => {
+                    const reviewCard = document.createElement('div');
+                    reviewCard.className = 'bg-white p-6 rounded-xl border border-gray-200 shadow-sm animate-fade-in';
+                    reviewCard.innerHTML = `
+                        <div class="flex text-ry-yellow mb-3">
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        </div>
+                        <p class="text-gray-700 text-sm italic mb-4">"${reviewData.review}"</p>
+                        <div class="flex flex-col mt-auto">
+                            <span class="font-bold text-ry-blue text-sm">${reviewData.name}</span>
+                            <span class="text-xs text-gray-500">${reviewData.route}</span>
+                        </div>
+                    `;
+                    grid.appendChild(reviewCard);
+                });
+                lucide.createIcons();
+
+            } catch (e) {
+                console.error("Failed to parse reviews", e);
+                if (isInitialLoad) {
+                    disableAiFeatures();
+                } else {
+                    alert("Failed to retrieve reviews from the afterlife. Try again.");
+                }
+            } finally {
+                if (btn) {
+                    btn.disabled = false;
+                    btn.innerHTML = `<i data-lucide="refresh-cw" class="w-4 h-4"></i> Load More Reviews`;
+                    lucide.createIcons();
+                }
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (!apiKey || apiKey.trim() === "") {
+                disableAiFeatures();
+            } else {
+                fetchReviews(10, true);
+            }
+        });
+
+        function bookFlight() {
+            const destSelect = document.getElementById('flight-dest');
+            const dest = destSelect.value;
+            const btn = document.getElementById('book-btn');
+            
+            if (!dest) {
+                alert("Please select a valid destination to proceed.");
+                destSelect.focus();
+                return;
+            }
+
+            // Simulate loading state
+            btn.disabled = true;
+            btn.innerHTML = `<i data-lucide="loader-2" class="w-6 h-6 animate-spin"></i> Processing...`;
+            lucide.createIcons();
+
+            setTimeout(() => {
+                // Show success modal
+                document.getElementById('success-modal').style.display = 'flex';
+                
+                // Reset button
+                btn.disabled = false;
+                btn.innerHTML = `<i data-lucide="search" class="w-6 h-6"></i> Book Flight`;
+                lucide.createIcons();
+            }, 1200);
+        }
+    </script>
+</body>
+</html>
